@@ -3,7 +3,7 @@ name: SonarQube Scan
 on:
   push:
     branches:
-      - week-2w
+      - week-2
 
 jobs:
   sonarqube:
