@@ -19,7 +19,7 @@ jobs:
         run: bandit -r week2-sast-sonarqube -f json -o bandit-report.json
 
       - name: Enforce Security Gate
-        run: bandit -r week2-sast-sonarqube -ll
+        run: bandit -r week2-sast-sonarqube -ll h
 
       - name: Run SonarScanner CLI
         shell: cmd
