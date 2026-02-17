@@ -4,8 +4,8 @@ def get_user(username):
     conn = sqlite3.connect("users.db")
     cursor = conn.cursor()
 
-    # Vulnerable SQL query (SQL Injection risk)
-    query = "SELECT * FROM users WHERE username = '" + username + "'"
-    
+    # Intentionally vulnerable query
+    query = f"SELECT * FROM users WHERE username = '{username}'"
+
     cursor.execute(query)
     return cursor.fetchall()
