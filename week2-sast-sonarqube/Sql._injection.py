@@ -1,4 +1,9 @@
 import sqlite3
+import subprocess
+
+def dangerous(user_input):
+    subprocess.call(user_input, shell=True)
+
 
 def get_user(username):
     conn = sqlite3.connect("users.db")
