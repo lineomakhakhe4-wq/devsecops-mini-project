@@ -31,7 +31,17 @@ jobs:
 
       - name: Notify Slack on Failure
         if: failure()
+        shell: powershell
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         run: |
-          curl -X POST -H 'Content-type: application/json' \
-          --data '{"text":"🚨 Week 2 SAST Failed! SQL Injection detected in pipeline."}' \
-          ${{ secrets.SLACK_WEBHOOK_URL }}
+          $body = @{
+          text = "🚨 Week 2 SAST Failed! SQL Injection detected in pipeline."
+          } | ConvertTo-Json
+
+          Invoke-RestMethod `
+           -Uri $env:SLACK_WEBHOOK `
+           -Method Post `
+           -ContentType "application/json" `
+           -Body $body
+
