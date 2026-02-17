@@ -23,9 +23,9 @@ jobs:
         run: python -m bandit -r week2-sast-sonarqube -ll 
         continue-on-error: true
      
-      - name: Notify Slack on Failure
-        if: failure()
+      - name: Check Quality Gate
+        shell: cmd
         run: |
-          curl -X POST -H 'Content-type: application/json' \
-          --data '{"text":"🚨 Week 2 SAST Failed! SQL Injection detected in pipeline."}' \
-          ${{ secrets.SLACK_WEBHOOK_URL }}
+          curl -u ${{ secrets.SONAR_TOKEN }}: http://localhost:9000/api/qualitygates/project_status?projectKey=DevSecOps-Mini-Project > result.json
+          findstr "ERROR" result.json && exit 1 || exit 0
+
