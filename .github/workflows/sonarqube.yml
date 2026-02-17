@@ -1,4 +1,4 @@
-name: SonarQube Scan
+name: Week 2 - SAST Pipeline
 
 on:
   push:
@@ -6,11 +6,21 @@ on:
       - week-2
 
 jobs:
-  sonarqube:
-    runs-on: self-hosted   # since you're using local runner
+  sast:
+    runs-on: self-hosted
+
     steps:
       - uses: actions/checkout@v3
 
+      - name: Install Bandit
+        run: pip install bandit
+
+      - name: Generate Bandit Report
+        run: bandit -r week2-sast-sonarqube -f json -o bandit-report.json
+
+      - name: Enforce Security Gate
+        run: bandit -r week2-sast-sonarqube -ll
+
       - name: Run SonarScanner CLI
         shell: cmd
-        run: sonar-scanner -Dsonar.projectKey=DevSecOps-Mini-Project -Dsonar.sources=week2-sast-sonarqube -Dsonar.host.url=http://localhost:9000 -Dsonar.login=${{ secrets.SONAR_TOKEN }} 
+        run: sonar-scanner -Dsonar.projectKey=DevSecOps-Mini-Project -Dsonar.sources=week2-sast-sonarqube -Dsonar.host.url=http://localhost:9000 -Dsonar.login=${{ secrets.SONAR_TOKEN }} -Dsonar.python.bandit.reportPaths=bandit-report.json
