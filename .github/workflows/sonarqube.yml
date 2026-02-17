@@ -33,7 +33,7 @@ jobs:
         if: failure()
         shell: powershell
         env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: |
           $body = @{
           text = "🚨 Week 2 SAST Failed! SQL Injection detected in pipeline."
