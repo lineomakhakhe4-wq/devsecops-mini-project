@@ -22,7 +22,10 @@ jobs:
       - name: Enforce Security Gate
         run: python -m bandit -r week2-sast-sonarqube -ll 
         continue-on-error: true
-
-      - name: Run SonarScanner CLI
-        shell: cmd
-        run: sonar-scanner -Dsonar.projectKey=DevSecOps-Mini-Project -Dsonar.sources=week2-sast-sonarqube -Dsonar.host.url=http://localhost:9000 -Dsonar.login=${{ secrets.SONAR_TOKEN }} -Dsonar.python.bandit.reportPaths=bandit-report.json
+     
+      - name: Notify Slack on Failure
+        if: failure()
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          --data '{"text":"🚨 Week 2 SAST Failed! SQL Injection detected in pipeline."}' \
+          ${{ secrets.SLACK_WEBHOOK_URL }}
