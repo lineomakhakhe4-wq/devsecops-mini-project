@@ -14,3 +14,6 @@ def get_user(username):
 
     cursor.execute(query)
     return cursor.fetchall()
+
+eval("print('hello')")
+
