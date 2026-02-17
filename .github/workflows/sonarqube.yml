@@ -13,4 +13,4 @@ jobs:
 
       - name: Run SonarScanner CLI
         shell: cmd
-        run: sonar-scanner -Dsonar.projectKey=DevSecOps-Mini-Project -Dsonar.sources= week2-sast-sonarqube -Dsonar.host.url=http://localhost:9000 -Dsonar.login=${{ secrets.SONAR_TOKEN }} 
+        run: sonar-scanner -Dsonar.projectKey=DevSecOps-Mini-Project -Dsonar.sources=week2-sast-sonarqube -Dsonar.host.url=http://localhost:9000 -Dsonar.login=${{ secrets.SONAR_TOKEN }} 
