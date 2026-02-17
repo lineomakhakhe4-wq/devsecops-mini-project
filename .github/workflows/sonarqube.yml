@@ -15,7 +15,7 @@ jobs:
       - name: Run SonarScanner CLI
         run: |
           sonar-scanner ^
-            -Dsonar.projectKey=DevSecOps-Python-App ^
+            -Dsonar.projectKey=DevSecOps-Mini-Project ^
             -Dsonar.sources=. ^
             -Dsonar.host.url=http://localhost:9000 ^
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
