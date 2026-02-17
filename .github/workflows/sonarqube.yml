@@ -13,13 +13,13 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Install Bandit
-        run: pip install bandit
+        run: python -m pip install bandit
 
       - name: Generate Bandit Report
-        run: bandit -r week2-sast-sonarqube -f json -o bandit-report.json
+        run: python -m bandit -r week2-sast-sonarqube -f json -o bandit-report.json
 
       - name: Enforce Security Gate
-        run: bandit -r week2-sast-sonarqube -ll 
+        run: python -m bandit -r week2-sast-sonarqube -ll 
 
       - name: Run SonarScanner CLI
         shell: cmd
