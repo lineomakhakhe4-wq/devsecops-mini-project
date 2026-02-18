@@ -59,4 +59,4 @@ jobs:
          -F "engagement=3" `
          -F "scan_type=ZAP Scan" `
          -F "file=@zap-report.json" `
-         "${{ secrets.DEFECTDOJO_URL }}/api/v2/import-scan/"
+         "${{ secrets.DEFECTDOJO_URL }}/api/v2/import-scan/" sd
