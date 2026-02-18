@@ -48,7 +48,7 @@ jobs:
           -F "engagement=1" ^
           -F "scan_type=Bandit Scan" ^
           -F "file=@bandit-report.json" ^
-          ${{ secrets.DEFECTDOJO_URL }}/api/v2/import-scan/ as
+          ${{ secrets.DEFECTDOJO_URL }}/api/v2/import-scan/ 
 
 
       # --- Upload DAST to DefectDojo ---
