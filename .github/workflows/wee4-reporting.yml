@@ -43,7 +43,8 @@ jobs:
       - name: Upload Bandit Report
         shell: cmd
         run: |
-          curl -X POST -H "Authorization: Token ${{ secrets.DEFECTDOJO_API_KEY }}" -F "engagement=3" -F "scan_type=Bandit Scan" -F "file=@bandit-report.json" "${{ secrets.DEFECTDOJO_URL }}/api/v2/import-scan/"
+          curl -X POST -H "Authorization: Token ${{ secrets.DEFECTDOJO_API_KEY }}" -F "engagement=3" -F "scan_type=Bandit Scan" -F "file=@bandit-report.json" http://localhost:8080/api/v2/import-scan/
+
 
 
 
@@ -51,4 +52,4 @@ jobs:
       - name: Upload ZAP Report
         shell: cmd
         run: |
-          curl -X POST -H "Authorization: Token ${{ secrets.DEFECTDOJO_API_KEY }}" -F "engagement=3" -F "scan_type=ZAP Scan" -F "file=@zap-report.json" "${{ secrets.DEFECTDOJO_URL }}/api/v2/import-scan/"
+          curl -X POST -H "Authorization: Token ${{ secrets.DEFECTDOJO_API_KEY }}" -F "engagement=3" -F "scan_type=Bandit Scan" -F "file=@bandit-report.json" http://localhost:8080/api/v2/import-scan/
