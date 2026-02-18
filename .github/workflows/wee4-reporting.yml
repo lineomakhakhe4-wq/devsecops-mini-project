@@ -41,7 +41,7 @@ jobs:
 
       # --- Upload SAST to DefectDojo ---
       - name: Upload Bandit Report
-        shell: powershell
+        shell: cmd
         run: |
           curl -X POST `
           -H "Authorization: Token ${{ secrets.DEFECTDOJO_API_KEY }}" `
@@ -52,7 +52,7 @@ jobs:
 
       # --- Upload DAST to DefectDojo ---
       - name: Upload ZAP Report
-        shell: powershell
+        shell: cmd
         run: |
          curl -X POST `
          -H "Authorization: Token ${{ secrets.DEFECTDOJO_API_KEY }}" `
