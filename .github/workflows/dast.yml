@@ -15,10 +15,6 @@ jobs:
       - name: Build Docker Image
         run: docker build -t week3-app ./week3-dast/app
 
-      - name: Cleanup old containers
-        run: docker rm -f $(docker ps -aq) || echo "No containers to remove"
-
-
       - name: Run Application Container 
         run: docker run -d -p 5000:5000 week3-app
 
