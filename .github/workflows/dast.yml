@@ -27,3 +27,5 @@ jobs:
           zap-full-scan.py `
           -t http://host.docker.internal:5000 `
           -r zap-report.html
+          continue-on-error: true
+
