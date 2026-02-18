@@ -45,7 +45,7 @@ jobs:
         run: |
           curl -X POST ^
           -H "Authorization: Token ${{ secrets.DEFECTDOJO_API_KEY }}" ^
-          -F "engagement=3" ^
+          -F "engagement=1" ^
           -F "scan_type=Bandit Scan" ^
           -F "file=@bandit-report.json" ^
           ${{ secrets.DEFECTDOJO_URL }}/api/v2/import-scan/
@@ -57,7 +57,7 @@ jobs:
         run: |
          curl -X POST ^
          -H "Authorization: Token ${{ secrets.DEFECTDOJO_API_KEY }}" ^
-         -F "engagement=3" ^
+         -F "engagement=1" ^
          -F "scan_type=ZAP Scan" ^
          -F "file=@zap-report.json" ^
          ${{ secrets.DEFECTDOJO_URL }}/api/v2/import-scan/
