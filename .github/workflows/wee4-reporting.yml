@@ -57,14 +57,16 @@ jobs:
       # -----------------------------
       - name: Upload Bandit Report to DefectDojo
         shell: cmd
-        run: curl -X POST -H "Authorization: Token ${{ secrets.DEFECTDOJO_API_KEY }}" -F "engagement=1" -F "scan_type=Bandit" -F "file=@bandit-report.json" http://localhost:8080/api/v2/import-scan/
+        run: |
+          curl -X POST -H "Authorization: Token ${{ secrets.DEFECTDOJO_API_KEY }}" -F "engagement=1" -F "scan_type=Bandit" -F "file=@bandit-report.json" http://localhost:8080/api/v2/import-scan/
 
       # -----------------------------
       # Upload DAST Report to DefectDojo
       # -----------------------------
       - name: Upload ZAP Report to DefectDojo
         shell: cmd
-        run: curl -X POST -H "Authorization: Token ${{ secrets.DEFECTDOJO_API_KEY }}" -F "engagement=1" -F "scan_type=ZAP Scan" -F "file=@zap-report.json" http://localhost:8080/api/v2/import-scan/
+        run: |
+          curl -X POST -H "Authorization: Token ${{ secrets.DEFECTDOJO_API_KEY }}" -F "engagement=1" -F "scan_type=ZAP Scan" -F "file=@zap-report.json" http://localhost:8080/api/v2/import-scan/
 
       # -----------------------------
       # Cleanup
