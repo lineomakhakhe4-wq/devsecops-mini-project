@@ -47,7 +47,8 @@ jobs:
           ghcr.io/zaproxy/zaproxy:stable `
           zap-full-scan.py `
           -t http://host.docker.internal:5000 `
-          -J zap-report.json
+          -x zap-report.xml
+
 
       - name: Verify ZAP Report Exists
         shell: cmd
@@ -67,7 +68,7 @@ jobs:
       - name: Upload Bandit Report to DefectDojo
         shell: cmd
         run: |
-          curl -X POST -H "Authorization: Token ${{ secrets.DEFECTDOJO_API_KEY }}" -F "engagement=1" -F "scan_type=Bandit" -F "file=@bandit-report.json" http://localhost:8080/api/v2/import-scan/
+          curl -X POST -H "Authorization: Token ${{ secrets.DEFECTDOJO_API_KEY }}" -F "engagement=1" -F "scan_type=Bandit scan" -F "file=@bandit-report.json" http://localhost:8080/api/v2/import-scan/
 
       # -----------------------------
       # Upload DAST Report to DefectDojo
@@ -75,7 +76,7 @@ jobs:
       - name: Upload ZAP Report to DefectDojo
         shell: cmd
         run: |
-          curl -X POST -H "Authorization: Token ${{ secrets.DEFECTDOJO_API_KEY }}" -F "engagement=1" -F "scan_type=ZAP Scan" -F "file=@zap-report.json" http://localhost:8080/api/v2/import-scan/
+          curl -X POST -H "Authorization: Token ${{ secrets.DEFECTDOJO_API_KEY }}" -F "engagement=1" -F "scan_type=ZAP Scan" -F "file=@zap-report.xml" http://localhost:8080/api/v2/import-scan/
 
       # -----------------------------
       # Cleanup
