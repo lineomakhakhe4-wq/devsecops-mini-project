@@ -68,7 +68,7 @@ jobs:
       - name: Upload Bandit Report to DefectDojo
         shell: cmd
         run: |
-          curl -X POST -H "Authorization: Token ${{ secrets.DEFECTDOJO_API_KEY }}" -F "engagement=1" -F "scan_type=Bandit scan" -F "file=@bandit-report.json" http://localhost:8080/api/v2/import-scan/
+          curl -X POST -H "Authorization: Token ${{ secrets.DEFECTDOJO_API_KEY }}" -F "engagement=1" -F "scan_type=Bandit Scan" -F "file=@bandit-report.json" http://localhost:8080/api/v2/import-scan/
 
       # -----------------------------
       # Upload DAST Report to DefectDojo
