@@ -1,0 +1,47 @@
+name: Week 2 - SAST Pipeline
+
+on:
+  push:
+    branches:
+      - week-2
+
+jobs:
+  sast:
+    runs-on: self-hosted
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Bandit
+        run: python -m pip install bandit
+
+      - name: Generate Bandit Report
+        run: python -m bandit -r week2-sast-sonarqube -f json -o bandit-report.json
+        continue-on-error: true
+
+      - name: Enforce Security Gate
+        run: python -m bandit -r week2-sast-sonarqube -ll 
+        continue-on-error: true
+     
+      - name: Check Quality Gate
+        shell: cmd
+        run: |
+         curl -u ${{ secrets.SONAR_TOKEN }}: http://localhost:9000/api/qualitygates/project_status?projectKey=DevSecOps-Mini-Project > result.json
+         findstr "ERROR" result.json && exit 1 || exit 0
+
+      - name: Notify Slack on Failure
+        if: failure()
+        shell: powershell
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          $body = @{
+          text = "🚨 Week 2 SAST Failed! SQL Injection detected in pipeline."
+          } | ConvertTo-Json
+
+          Invoke-RestMethod `
+           -Uri $env:SLACK_WEBHOOK `
+           -Method Post `
+           -ContentType "application/json" `
+           -Body $body
+
