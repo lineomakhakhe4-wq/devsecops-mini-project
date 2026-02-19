@@ -19,7 +19,7 @@ jobs:
         run: python -m pip install bandit
 
       - name: Generate Bandit JSON Report
-        run: python -m bandit -r . -f json -o bandit-report.json
+        run: python -m bandit -r week3-dast -f json -o bandit-report.json
         continue-on-error: true
 
       - name: Verify Bandit Report Exists
@@ -52,6 +52,14 @@ jobs:
       - name: Verify ZAP Report Exists
         shell: cmd
         run: dir zap-report.json
+
+      - name: Show Bandit JSON Content
+        shell: cmd
+        run: type bandit-report.json
+
+      - name: Show ZAP JSON Content
+        shell: cmd
+        run: type zap-report.json
 
       # -----------------------------
       # Upload SAST Report to DefectDojo
